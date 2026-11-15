@@ -1,0 +1,27 @@
+
+{% extends 'quotes_app/base.html' %}
+
+{% block title %}
+    {{ author.fullname }} - Quotes to Scrape
+{% endblock %}
+
+{% block content %}
+
+    <div class="author-details">
+
+        <h3>{{ author.fullname }}</h3>
+
+        <p>
+            <strong>Born:</strong>
+            {{ author.born_date }} in {{ author.born_location }}
+        </p>
+
+        <div class="author-description">
+            <strong>Description:</strong>
+            <br>
+            {{ author.description }}
+        </div>
+
+    </div>
+
+{% endblock %}

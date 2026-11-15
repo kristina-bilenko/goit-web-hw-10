@@ -1,0 +1,59 @@
+
+{% extends 'quotes_app/base.html' %}
+
+{% block title %}
+    Quotes to Scrape
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            {% for quote in quotes %}
+
+                <div class="quote">
+
+                    <!-- Quote text -->
+                    <span class="text">
+                        {{ quote.quote }}
+                    </span>
+
+                    <!-- Author -->
+                    <span>
+                        <small class="author">
+                            {{ quote.author.fullname }}
+                        </small>
+
+                        <a href="{% url 'author_detail' quote.author.id %}">
+                            (about)
+                        </a>
+                    </span>
+
+                    <!-- Tags -->
+                    <div class="tags">
+
+                        <span class="tag">Tags:</span>
+
+                        {% for tag in quote.tags %}
+                            <a class="tag" href="#">
+                                {{ tag }}
+                            </a>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <p>No quotes found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

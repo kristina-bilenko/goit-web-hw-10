@@ -1,0 +1,66 @@
+
+{% extends 'quotes_app/base.html' %}
+
+{% block title %}
+    Add quote - Quotes to Scrape
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-8">
+
+        <h2>Add a new quote</h2>
+
+        <form method="POST" action="{% url 'add_quote' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.quote.id_for_label }}">
+                    Quote
+                </label>
+                {{ form.quote }}
+
+                {% for error in form.quote.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.author.id_for_label }}">
+                    Author
+                </label>
+                {{ form.author }}
+
+                {% for error in form.author.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.tags.id_for_label }}">
+                    Tags
+                </label>
+                {{ form.tags }}
+
+                <small class="text-muted">
+                    Separate tags with commas.
+                </small>
+
+                {% for error in form.tags.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Add quote
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

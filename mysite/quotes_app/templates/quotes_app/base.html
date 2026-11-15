@@ -1,0 +1,84 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Quotes to Scrape{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="row header-box">
+
+            <div class="col-md-8">
+                <h1>
+                    <a href="/" style="text-decoration: none">
+                        Quotes to Scrape
+                    </a>
+                </h1>
+            </div>
+
+            <div class="col-md-4">
+
+                {% if user.is_authenticated %}
+
+                    <div>
+                        <a href="{% url 'add_author' %}">Add author</a> |
+                        <a href="{% url 'add_quote' %}">Add quote</a>
+                    </div>
+
+                    <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-link">
+                            Logout
+                        </button>
+                    </form>
+
+                {% else %}
+
+                    <p>
+                        <a href="{% url 'login' %}">Login</a> |
+                        <a href="{% url 'register' %}">Register</a>
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- Main content -->
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <p class="text-muted">
+                Quotes by:
+                <a href="https://www.goodreads.com/quotes">
+                    GoodReads.com
+                </a>
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

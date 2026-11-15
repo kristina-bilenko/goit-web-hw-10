@@ -1,0 +1,73 @@
+
+{% extends 'quotes_app/base.html' %}
+
+{% block title %}
+    Add author - Quotes to Scrape
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-8">
+
+        <h2>Add a new author</h2>
+
+        <form method="POST" action="{% url 'add_author' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.fullname.id_for_label }}">
+                    Fullname
+                </label>
+                {{ form.fullname }}
+
+                {% for error in form.fullname.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.born_date.id_for_label }}">
+                    Born date
+                </label>
+                {{ form.born_date }}
+
+                {% for error in form.born_date.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.born_location.id_for_label }}">
+                    Born location
+                </label>
+                {{ form.born_location }}
+
+                {% for error in form.born_location.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">
+                    Description
+                </label>
+                {{ form.description }}
+
+                {% for error in form.description.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Add author
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
